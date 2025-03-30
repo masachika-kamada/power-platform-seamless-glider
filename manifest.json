@@ -3,27 +3,9 @@
   "name": "Power Platform Seamless Glider",
   "version": "1.0",
   "description": "A Chrome extension to maintain environment context while navigating between Power Platform services.",
+  "author": "Kamada Masachika",
   "permissions": [
-    "tabs",
-    "storage",
-    "https://*.powerapps.com/*",
-    "https://*.powerautomate.com/*",
-    "https://*.powerpages.microsoft.com/*",
-    "https://*.copilotstudio.microsoft.com/*"
-  ],
-  "background": {
-    "service_worker": "background.js"
-  },
-  "content_scripts": [
-    {
-      "matches": [
-        "https://*.powerapps.com/*",
-        "https://*.powerautomate.com/*",
-        "https://*.powerpages.microsoft.com/*",
-        "https://*.copilotstudio.microsoft.com/*"
-      ],
-      "js": ["content.js"]
-    }
+    "tabs"
   ],
   "action": {
     "default_popup": "popup.html",

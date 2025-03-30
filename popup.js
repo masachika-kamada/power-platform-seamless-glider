@@ -1,19 +1,32 @@
-document.getElementById('ppac').addEventListener('click', () => {
-  chrome.runtime.sendMessage({ action: 'navigate', url: 'https://admin.powerplatform.microsoft.com/environments/' });
-});
+document.addEventListener('DOMContentLoaded', function () {
+  const services = document.querySelectorAll('.service');
+  const serviceUrls = {
+    'Admin Center': 'https://admin.powerplatform.microsoft.com/environments/environment/[ID]/hub',
+    'Maker Portal': 'https://make.powerapps.com/environments/[ID]/home',
+    'Power Automate': 'https://make.powerautomate.com/environments/[ID]/home',
+    'Power Pages': 'https://make.powerpages.microsoft.com/environments/[ID]/portals/home',
+    'Copilot Studio': 'https://copilotstudio.microsoft.com/environments/[ID]/home'
+  };
 
-document.getElementById('power_apps').addEventListener('click', () => {
-  chrome.runtime.sendMessage({ action: 'navigate', url: 'https://make.powerapps.com/environments/' });
-});
+  services.forEach(service => {
+    service.addEventListener('click', function () {
+      const serviceName = this.querySelector('span').textContent;
+      const baseUrl = serviceUrls[serviceName];
 
-document.getElementById('power_automate').addEventListener('click', () => {
-  chrome.runtime.sendMessage({ action: 'navigate', url: 'https://make.powerautomate.com/environments/' });
-});
+      chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        const currentUrl = tabs[0].url;
+        const environmentIdMatch = currentUrl.match(/(Default-)?[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/);
 
-document.getElementById('power_pages').addEventListener('click', () => {
-  chrome.runtime.sendMessage({ action: 'navigate', url: 'https://make.powerpages.microsoft.com/environments/' });
-});
-
-document.getElementById('copilot_studio').addEventListener('click', () => {
-  chrome.runtime.sendMessage({ action: 'navigate', url: 'https://copilotstudio.microsoft.com/environments/' });
+        if (environmentIdMatch) {
+          const environmentId = environmentIdMatch[0];
+          const newUrl = baseUrl.replace("[ID]", environmentId);
+          chrome.tabs.update(tabs[0].id, { url: newUrl }, function () {
+            window.close(); // Close the popup after redirecting
+          });
+        } else {
+          alert('Could not find environment id in the current URL');
+        }
+      });
+    });
+  });
 });
