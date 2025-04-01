@@ -1,0 +1,8 @@
+{
+    "appName": {
+        "message": "Power Platform Seamless Glider"
+    },
+    "appDesc": {
+        "message": "Seamlessly retain your environment context across Power Platform services for a smoother workflow."
+    }
+}
