@@ -46,7 +46,7 @@ def main():
             download_favicon(favicon_url, filename)
         else:
             print("Favicon not found")
- 
- 
+
+
 if __name__ == "__main__":
     main()
