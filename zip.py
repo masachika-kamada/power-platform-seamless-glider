@@ -34,7 +34,7 @@ def create_zip(source_dir, target_zip, include_items):
 def main():
     include_items = [
         "_locales",
-        "arranged"
+        "arranged",
         "icons",
         "manifest.json",
         "popup.html",
