@@ -6,10 +6,7 @@ Power Platform Seamless Glider is a Chrome extension that allows you to maintain
 
 ## Installation
 
-1. Clone or download this repository to your local machine.
-2. Open Chrome and navigate to `chrome://extensions/`.
-3. Enable "Developer mode" by toggling the switch in the top right corner.
-4. Click on the "Load unpacked" button and select the directory where you cloned or downloaded this repository.
+<https://chromewebstore.google.com/detail/power-platform-seamless-g/kpnngmgblecfoigmoadiolmlpecmdlel>
 
 ## Usage
 
